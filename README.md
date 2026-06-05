@@ -1,14 +1,11 @@
-# Club Deportivo Ricardo Méndez V24 Supabase Online
+# Club Deportivo Ricardo Méndez V25
 
-Incluye:
-- Conexión Supabase desde Panel Admin.
-- Tablas SQL listas en `supabase_setup.sql`.
-- Storage bucket `club-assets` para imágenes, logos, fixture, historia y presidentes.
-- Botones Admin:
-  - Guardar conexión Supabase.
-  - Subir datos actuales a Supabase.
-  - Cargar datos desde Supabase.
-- La web carga información desde Supabase al abrir.
-- Fallback local si Supabase no está configurado.
+Corrección:
+- Se reparó el error de JavaScript que impedía abrir el Panel Admin.
+- Se mantiene conexión Supabase.
+- Se mantiene fixture por imágenes.
+- Se mantiene galería de presidentes.
+- Se mantiene historia con fotografía.
+- Se mantienen tablas oficiales y Orgullo Rimen.
 
 Clave admin demo: admin1932
