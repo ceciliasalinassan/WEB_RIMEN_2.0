@@ -1139,3 +1139,20 @@ img[alt]{
   color:var(--gold2);
   font-weight:900;
 }
+
+/* V26: Admin Emergency Fix */
+#adminModal.modal.show,
+#adminModal.force-admin-open{
+  display:grid !important;
+  opacity:1 !important;
+  visibility:visible !important;
+  z-index:999999999 !important;
+}
+#adminModal .modal-box{
+  z-index:1000000000 !important;
+}
+#openAdmin,
+#openAdminTop{
+  cursor:pointer !important;
+  pointer-events:auto !important;
+}

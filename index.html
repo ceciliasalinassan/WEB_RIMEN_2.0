@@ -236,6 +236,8 @@
     </section>
   </main>
 
+  <button id="openAdminEmergency" type="button" title="Admin" style="position:fixed;right:18px;bottom:18px;z-index:99999999;border:1px solid rgba(0,187,255,.6);background:linear-gradient(90deg,#d7aa31,#ffe797);color:#000;font-weight:900;border-radius:999px;padding:13px 18px;box-shadow:0 0 25px rgba(0,187,255,.35);cursor:pointer;">⚙️ Admin</button>
+
   <div id="adminModal" class="modal">
     <div class="modal-box">
       <button id="closeAdmin" class="close">×</button>
@@ -358,5 +360,88 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="script.js"></script>
   <script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('./service-worker.js');</script>
+
+<script>
+(function(){
+  function byId(id){ return document.getElementById(id); }
+
+  function openAdminModal(){
+    var modal = byId('adminModal');
+    if(!modal){
+      alert('No se encontró el panel administrador en esta versión.');
+      return;
+    }
+    modal.classList.add('show');
+    modal.classList.add('force-admin-open');
+    modal.style.display = 'grid';
+    modal.style.zIndex = '999999999';
+  }
+
+  function closeAdminModal(){
+    var modal = byId('adminModal');
+    if(!modal) return;
+    modal.classList.remove('show');
+    modal.classList.remove('force-admin-open');
+    modal.style.display = 'none';
+  }
+
+  function loginAdmin(){
+    var pass = byId('adminPassword');
+    var login = byId('loginPanel');
+    var panel = byId('adminPanel');
+    if(!pass || !login || !panel) return;
+    if(pass.value !== 'admin1932'){
+      alert('Clave incorrecta');
+      return;
+    }
+    login.classList.add('hidden');
+    panel.classList.remove('hidden');
+
+    try {
+      if (typeof loadAdminFields === 'function') loadAdminFields();
+    } catch(e) {
+      console.warn('No se pudieron cargar campos admin:', e);
+    }
+  }
+
+  function bindAdminButtons(){
+    var b1 = byId('openAdmin');
+    var b2 = byId('openAdminTop');
+    var b3 = byId('openAdminEmergency');
+    var close = byId('closeAdmin');
+    var login = byId('loginBtn');
+
+    if(b1) b1.onclick = function(e){ e.preventDefault(); e.stopPropagation(); openAdminModal(); };
+    if(b3) b3.onclick = function(e){ e.preventDefault(); e.stopPropagation(); openAdminModal(); };
+    if(b2) b2.onclick = function(e){ e.preventDefault(); e.stopPropagation(); openAdminModal(); };
+    if(close) close.onclick = function(e){ e.preventDefault(); closeAdminModal(); };
+    if(login) login.onclick = function(e){ e.preventDefault(); loginAdmin(); };
+
+    document.addEventListener('click', function(e){
+      var target = e.target && e.target.closest ? e.target.closest('#openAdmin,#openAdminTop,#openAdminEmergency,#closeAdmin,#loginBtn') : null;
+      if(!target) return;
+      if(target.id === 'openAdmin' || target.id === 'openAdminTop' || target.id === 'openAdminEmergency'){
+        e.preventDefault(); e.stopPropagation(); openAdminModal();
+      }
+      if(target.id === 'closeAdmin'){
+        e.preventDefault(); closeAdminModal();
+      }
+      if(target.id === 'loginBtn'){
+        e.preventDefault(); loginAdmin();
+      }
+    }, true);
+  }
+
+  window.openAdminModal = openAdminModal;
+  window.closeAdminModal = closeAdminModal;
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', bindAdminButtons);
+  }else{
+    bindAdminButtons();
+  }
+})();
+</script>
+
 </body>
 </html>

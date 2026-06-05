@@ -1,11 +1,10 @@
-# Club Deportivo Ricardo Méndez V25
+# Club Deportivo Ricardo Méndez V26
 
-Corrección:
-- Se reparó el error de JavaScript que impedía abrir el Panel Admin.
-- Se mantiene conexión Supabase.
-- Se mantiene fixture por imágenes.
-- Se mantiene galería de presidentes.
-- Se mantiene historia con fotografía.
-- Se mantienen tablas oficiales y Orgullo Rimen.
+Corrección fuerte:
+- Admin reforzado con script independiente.
+- Agregado botón flotante “⚙️ Admin” abajo a la derecha.
+- El panel abre aunque falle alguna función secundaria.
+- Login admin funciona con clave: admin1932.
+- Mantiene Supabase, fixture por imágenes, presidentes, historia con foto y tablas oficiales.
 
 Clave admin demo: admin1932
